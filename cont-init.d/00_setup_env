@@ -1,0 +1,30 @@
+#!/usr/bin/with-contenv sh
+
+# Setup s6 container environment variables
+# This script copies env vars from /etc/cont-env to s6's runtime environment
+# so they're available to all services started by s6-overlay
+
+set -e
+
+echo "=========================================="
+echo "Setting up s6 container environment"
+echo "=========================================="
+
+# s6-overlay v2 uses /var/run/s6/container_environment/ for runtime env vars
+S6_ENV_DIR="/var/run/s6/container_environment"
+mkdir -p "$S6_ENV_DIR"
+
+# Copy our custom env vars to s6 runtime environment
+if [ -d /etc/cont-env ]; then
+    for envfile in /etc/cont-env/*; do
+        if [ -f "$envfile" ]; then
+            envname=$(basename "$envfile")
+            cp "$envfile" "$S6_ENV_DIR/$envname"
+            echo "  Set $envname=$(cat $envfile)"
+        fi
+    done
+fi
+
+echo "=========================================="
+echo "Environment setup complete"
+echo "=========================================="
