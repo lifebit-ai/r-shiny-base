@@ -1,0 +1,28 @@
+name: PR validation workflow
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+  statuses: write
+  packages: write
+  actions: write
+  checks: write
+
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
+    branches:
+      - main
+      - dev
+
+  workflow_dispatch:
+
+jobs:
+  pr-validation-conventional-commits:
+    name: Validate PR for conventional commits
+    uses: lifebit-ai/gha-kaniko/.github/workflows/pr-validation-conventional-commits.yaml@v1.0.0
+    secrets: inherit
