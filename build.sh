@@ -90,7 +90,7 @@ if [ $? -eq 0 ]; then
     echo "  # Extend this base image for your own app:"
     echo "  # Dockerfile:"
     echo "  #   FROM ${FULL_IMAGE_NAME}"
-    echo "  #   COPY ./my-shiny-app /mnt/src/myapp"
+    echo "  #   COPY ./my-shiny-app /opt/shiny-apps/myapp"
     echo "  #   ENV SHINY_APP_PATH=myapp"
     echo ""
     echo "  # Build with different R version:"

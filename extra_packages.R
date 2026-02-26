@@ -1,5 +1,4 @@
 # Install essential packages for the current R version
-# This script will be run for each R version installation
 
 # Configure Posit Package Manager (P3M) for pre-compiled binaries
 # This dramatically reduces build time by using binary packages instead of compiling from source
